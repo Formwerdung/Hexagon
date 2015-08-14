@@ -2,9 +2,6 @@
 
 namespace Formwerdung\Hexagon\Taxonomies;
 
-/**
- * This is a taxonomy which brings a
- */
 class TaxNav extends \Formwerdung\Hexagon\Lib\Taxonomy {
   protected static $name = 'TaxNav';
   protected static $pl_name = 'TaxNavs';
@@ -13,6 +10,12 @@ class TaxNav extends \Formwerdung\Hexagon\Lib\Taxonomy {
 
   /**
    * Make a nav for every term in the taxonomy
+   *
+   * @since  0.0.1
+   * @access public
+   * @uses   get_terms()
+   * @uses   is_wp_error()
+   * @uses   register_nav_menus()
    */
   public static function createTaxonomyNavs() {
     $args = [
@@ -32,7 +35,9 @@ class TaxNav extends \Formwerdung\Hexagon\Lib\Taxonomy {
   /**
    * Register callbacks for actions and filters
    *
-   * @mvc Controller
+   * @since  0.0.1
+   * @access protected
+   * @uses   add_action()
    */
   public function registerHookCallbacks() {
     add_action('init', get_called_class().'::createTaxonomy');
