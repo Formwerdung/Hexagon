@@ -23,7 +23,7 @@ class PostType extends Base {
   protected static $slug;
 
   /**
-   * @var string genericons menu item id
+   * @var string genericons menu item id (the WordPress default is the post icon)
    * @access protected
    */
   protected static $menu_icon;
