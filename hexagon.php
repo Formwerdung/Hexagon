@@ -2,7 +2,7 @@
 /*
 Plugin Name: Hexagon
 Plugin URI:  http://formwerdung.ch
-Description: Funktionalität für Kunden
+Description: Hexagon makes your individual content possible, please do not delete.
 Version:     0.0.1
 Author:      Formwerdung
 Author URI:  http://formwerdung.ch
@@ -47,7 +47,7 @@ class Hexagon {
    */
   public function __construct() {
     $this->bootstrap();
-    register_activation_hook(__FILE__, [$this, '::activate()']);
+    register_activation_hook(  __FILE__, [$this, '::activate()']);
     // register_deactivation_hook(__FILE__, [$this, '::deactivate()']);
   }
 
