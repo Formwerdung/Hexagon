@@ -87,9 +87,9 @@ class PostType extends Base {
       'hierarchical'         => true,
       'capability_type'      => 'post',
       'has_archive'          => true,
-      'rewrite'              => array( 'slug' => static::$name ),
+      'rewrite'              => [ 'slug' => static::$name ],
       'query_var'            => true,
-      'supports'             => array( 'title', 'editor' )
+      'supports'             => [ 'title', 'editor' ]
     ];
     return $params;
   }

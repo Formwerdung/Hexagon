@@ -71,7 +71,7 @@ class Taxonomy extends Base {
    * @return array taxonomy parameters
    */
   protected static function getTaxonomyParams($hierarchical = true) {
-    $labels = array(
+    $labels = [
       'name'                       => static::$pl_name,
       'singular_name'              => static::$name,
       'search_items'               => static::$pl_name.' durchsuchen',
@@ -85,15 +85,15 @@ class Taxonomy extends Base {
       'add_or_remove_items'        => static::$pl_name.' hinzufügen oder entfernen',
       'choose_from_most_used'      => null,
       'not_found'                  => 'Keine '.static::$pl_name.' gefunden'
-    );
-    $params = array(
+    ];
+    $params = [
       'hierarchical'      => $hierarchical,
       'labels'            => $labels,
       'show_ui'           => true,
       'show_admin_column' => true,
       'query_var'         => true,
-      'rewrite'           => array( 'slug' ),
-    );
+      'rewrite'           => [ 'slug' ],
+    ];
     return $params;
   }
 
