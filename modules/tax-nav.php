@@ -6,9 +6,9 @@ namespace Formwerdung\Hexagon\Taxonomies;
  * This is a taxonomy which brings a
  */
 class TaxNav extends \Formwerdung\Hexagon\Lib\Taxonomy {
-  protected static $tax_name = 'TaxNav';
-  protected static $tax_pl_name = 'TaxNavs';
-  protected static $tax_slug = 'fw-tax-nav';
+  protected static $name = 'TaxNav';
+  protected static $pl_name = 'TaxNavs';
+  protected static $slug = 'fw-tax-nav';
   public static $hierarchical = true;
 
   /**
@@ -18,7 +18,7 @@ class TaxNav extends \Formwerdung\Hexagon\Lib\Taxonomy {
     $args = [
       'hide_empty' => false
     ];
-    $terms = get_terms(static::$tax_slug, $args);
+    $terms = get_terms(static::$slug, $args);
     if (!empty($terms) && !is_wp_error($terms)) {
       foreach ($terms as $term) {
         $key = $term->slug.'_navigation';
@@ -26,7 +26,7 @@ class TaxNav extends \Formwerdung\Hexagon\Lib\Taxonomy {
         $navs[$key] = $value;
       }
       register_nav_menus($navs);
-    }    
+    }
   }
 
   /**

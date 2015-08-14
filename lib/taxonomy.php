@@ -3,35 +3,51 @@
 namespace Formwerdung\Hexagon\Lib;
 
 class Taxonomy extends Base {
-  protected static $tax_name;
-  protected static $tax_pl_name;
-  protected static $tax_slug;
-  public static $hierarchical = true;
 
   /**
-   * Check for error in extending classes
-   *
-   * @mvc Controller
+   * @var string name of the post type
+   * @access protected
    */
-  protected static function checkProperties() {
-    if (empty( static::$tax_name ) || empty( static::$tax_pl_name ) || empty( static::$tax_slug )) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  protected static $name;
+
+  /**
+   * @var string plural name of the post type
+   * @access protected
+   */
+  protected static $pl_name;
+
+  /**
+   * @var string slug of the post type
+   * @access protected
+   */
+  protected static $slug;
+
+  /**
+   * @var bool is the taxonomy hierarchical
+   * @access protected
+   */
+  protected static $hierarchical = true;
+
+  /**
+   * @var array which object types the taxonomy will be added to.
+   * @access protected
+   */
+  protected static $objs = [];
 
   /**
    * Registers the custom post type
    *
-   * @mvc Controller
+   * @since  0.0.1
+   * @access public
+   * @uses   taxonomy_exists()
+   * @uses   register_taxonomy()
    */
   public static function createTaxonomy() {
     if (static::checkProperties()) {
-      if (! taxonomy_exists(static::$tax_slug)) {
-        $tax_params   = static::getTaxonomyParams(static::$hierarchical);
-        $tax_objs  = static::getTaxonomyObjectTypes();
-        register_taxonomy(static::$tax_slug, $tax_objs, $tax_params);
+      if (!taxonomy_exists(static::$slug)) {
+        $params = static::getTaxonomyParams(static::$hierarchical);
+        $objs   = static::getTaxonomyObjectTypes();
+        register_taxonomy(static::$slug, $objs, $params);
       }
     } else {
       add_notice(__METHOD__ . ' error: Required static properties are not all set. No Taxonomy added.', 'error');
@@ -48,53 +64,54 @@ class Taxonomy extends Base {
   }
 
   /**
-   * Defines the parameters for the custom taxonomy
+   * Default implementation of taxonomy parameters
    *
-   * @mvc Model
-   *
-   * @return array
+   * @since  0.0.1
+   * @access protected
+   * @return array taxonomy parameters
    */
   protected static function getTaxonomyParams($hierarchical = true) {
-    $tax_labels = array(
-      'name'                       => static::$tax_pl_name,
-      'singular_name'              => static::$tax_name,
-      'search_items'               => static::$tax_pl_name.' durchsuchen',
-      'all_items'                  => 'Alle '.static::$tax_pl_name,
-      'edit_item'                  => static::$tax_name.' bearbeiten',
-      'update_item'                => static::$tax_name.' aktualisieren',
-      'add_new_item'               => 'Neues '.static::$tax_name,
-      'new_item_name'              => 'Neues '.static::$tax_name,
-      'popular_items'              => 'Populäre '.static::$tax_pl_name,
-      'separate_items_with_commas' => 'Mehrere '.static::$tax_pl_name.' mit Kommas trennen',
-      'add_or_remove_items'        => static::$tax_pl_name.' hinzufügen oder entfernen',
+    $labels = array(
+      'name'                       => static::$pl_name,
+      'singular_name'              => static::$name,
+      'search_items'               => static::$pl_name.' durchsuchen',
+      'all_items'                  => 'Alle '.static::$pl_name,
+      'edit_item'                  => static::$name.' bearbeiten',
+      'update_item'                => static::$name.' aktualisieren',
+      'add_new_item'               => 'Neues '.static::$name,
+      'new_item_name'              => 'Neues '.static::$name,
+      'popular_items'              => 'Populäre '.static::$pl_name,
+      'separate_items_with_commas' => 'Mehrere '.static::$pl_name.' mit Kommas trennen',
+      'add_or_remove_items'        => static::$pl_name.' hinzufügen oder entfernen',
       'choose_from_most_used'      => null,
-      'not_found'                  => 'Keine '.static::$tax_pl_name.' gefunden'
+      'not_found'                  => 'Keine '.static::$pl_name.' gefunden'
     );
-
-    $tax_params = array(
+    $params = array(
       'hierarchical'      => $hierarchical,
-      'labels'            => $tax_labels,
+      'labels'            => $labels,
       'show_ui'           => true,
       'show_admin_column' => true,
       'query_var'         => true,
       'rewrite'           => array( 'slug' ),
     );
-
-    return $tax_params;
+    return $params;
   }
 
   /**
    * Defines which post type objects the taxonomy is going to be added to
    *
-   * @mvc Model
-   *
-   * @return array
+   * @since  0.0.1
+   * @access protected
+   * @return array post type objects
    */
   protected static function getTaxonomyObjectTypes() {
-    $tax_objs = [
-      'post'
-    ];
-
-    return $tax_objs;
+    if (static::$objs) {
+      $objs = static::$objs;
+    } else {
+      $objs = [
+        'post'
+      ];
+    }
+    return $objs;
   }
 }

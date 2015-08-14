@@ -2,24 +2,38 @@
 
 namespace Formwerdung\Hexagon\Lib;
 
-/**
- * Abstract class to implement base methods, best practices for all classes
- */
 abstract class Base {
 
-    /**
-     * Constructor
-     *
-     * @mvc Controller
-     */
-    public function __construct() {
-      $this->registerHookCallbacks();
-    }
+  /**
+   * Constructor. The default is just a call to the register hook callback function.
+   *
+   * @since  0.0.1
+   * @access public
+   */
+  public function __construct() {
+     $this->registerHookCallbacks();
+  }
 
   /**
-   * Register callbacks for actions and filters
+   * Check for errors in post type and taxonomy classes
    *
-   * @mvc Controller
+   * @since  0.0.1
+   * @access protected
+   * @return bool
+   */
+  protected static function checkProperties() {
+    if (empty(static::$name) || empty(static::$pl_name) || empty(static::$slug)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /**
+   * Enforce use of a function to register all WordPress hook callbacks
+   *
+   * @since  0.0.1
+   * @access public
    */
   abstract public function registerHookCallbacks();
 }

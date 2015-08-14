@@ -8,34 +8,25 @@ class PostType extends Base {
    * @var string name of the post type
    * @access protected
    */
-  protected static $post_type_name;
+  protected static $name;
 
   /**
    * @var string plural name of the post type
    * @access protected
    */
-  protected static $post_type_pl_name;
+  protected static $pl_name;
 
   /**
    * @var string slug of the post type
    * @access protected
    */
-  protected static $post_type_slug;
+  protected static $slug;
 
   /**
-   * Check for errors in extending classes
-   *
-   * @since  0.0.1
+   * @var string genericons menu item id
    * @access protected
-   * @return bool
    */
-  protected static function checkProperties() {
-    if (empty( static::$post_type_name ) || empty( static::$post_type_pl_name ) || empty( static::$post_type_slug )) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  protected static $menu_icon;
 
   /**
    * Registers the custom post type
@@ -49,9 +40,9 @@ class PostType extends Base {
    */
   public static function createPostType() {
     if (static::checkProperties()) {
-      if (!post_type_exists(static::$post_type_slug)) {
-        $post_type_params = static::getPostTypeParams();
-        $post_type        = register_post_type(static::$post_type_slug, $post_type_params);
+      if (!post_type_exists(static::$slug)) {
+        $params = static::getPostTypeParams();
+        $post_type        = register_post_type(static::$slug, $params);
         if (is_wp_error($post_type)) {
           \add_notice(__METHOD__ . ' error: ' . $post_type->get_error_message(), 'error');
         }
@@ -62,7 +53,7 @@ class PostType extends Base {
   }
 
   /**
-   * Default implementation of post type parameters, overwritable by extending classes
+   * Default implementation of post type parameters
    *
    * @since  0.0.1
    * @access protected
@@ -70,37 +61,37 @@ class PostType extends Base {
    */
   protected static function getPostTypeParams() {
     $labels = [
-      'name'               => static::$post_type_pl_name,
-      'singular_name'      => static::$post_type_name,
-      'add_new'            => 'Add New',
-      'add_new_item'       => 'New ' .    static::$post_type_name,
-      'edit'               => 'Edit ' .   static::$post_type_pl_name,
-      'edit_item'          => 'Edit ' .   static::$post_type_name,
-      'new_item'           => 'New ' .    static::$post_type_name,
-      'view'               => 'View ' .   static::$post_type_pl_name,
-      'view_item'          => 'View ' .   static::$post_type_name,
-      'search_items'       => 'Search ' . static::$post_type_pl_name,
-      'not_found'          => 'No ' .     static::$post_type_pl_name . ' found',
-      'not_found_in_trash' => 'No ' .     static::$post_type_pl_name . ' found in Trash'
+      'name'               => static::$pl_name,
+      'singular_name'      => static::$name,
+      'add_new'            => 'Neu hinzufügen',
+      'add_new_item'       => 'Neuer ' .  static::$name,
+      'edit'               => static::$pl_name . ' bearbeiten',
+      'edit_item'          => static::$name    . ' bearbeiten',
+      'new_item'           => 'Neuer ' .  static::$name,
+      'view'               => static::$pl_name . ' ansehen',
+      'view_item'          => static::$name    . ' ansehen',
+      'search_items'       => static::$pl_name . ' durchsuchen',
+      'not_found'          => 'Keine ' .     static::$pl_name . ' gefunden',
+      'not_found_in_trash' => 'Keine ' .     static::$pl_name . ' im Mülleimer gefunden'
     ];
-    $post_type_params = [
+    $params = [
       'labels'               => $labels,
-      'singular_label'       => static::$post_type_name,
+      'singular_label'       => static::$name,
       'public'               => true,
       'exclude_from_search'  => false,
       'publicly_queryable'   => true,
       'show_ui'              => true,
       'show_in_menu'         => true,
       'menu_position'        => 5,
-      'menu_icon'            => 'dashicons-editor-video',
+      'menu_icon'            => static::$menu_icon,
       'hierarchical'         => true,
       'capability_type'      => 'post',
       'has_archive'          => true,
-      'rewrite'              => array( 'slug' => static::$post_type_name ),
+      'rewrite'              => array( 'slug' => static::$name ),
       'query_var'            => true,
       'supports'             => array( 'title', 'editor' )
     ];
-    return $post_type_params;
+    return $params;
   }
 
   /**
