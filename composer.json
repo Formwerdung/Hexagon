@@ -38,12 +38,11 @@
   "require": {
     "php": ">=5.4.0",
     "composer/installers": "~1.0.12",
-    "formwerdung/triangle": "0.1.0",
     "iandunn/admin-notice-helper": "0.2"
   },
   "extra": {
     "installer-paths": {
-      "../../mu-plugins/{$name}/": ["type:wordpress-muplugin", "formwerdung/triangle"],
+      "../../mu-plugins/{$name}/": ["type:wordpress-muplugin"],
       "../../plugins/{$name}/": ["type:wordpress-plugin"],
       "../../themes/{$name}/": ["type:wordpress-theme"]
     }

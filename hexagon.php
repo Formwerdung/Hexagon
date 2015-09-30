@@ -68,7 +68,7 @@ class Hexagon {
       foreach (glob(__DIR__.'/modules/*.php') as $file) {
         require_once($file);
         $basename = basename($file, '.php');
-        $class = \Formwerdung\Triangle::dashesToCamelCase($basename, true);
+        $class = $this->dashesToCamelCase($basename, true);
         $class = '\Formwerdung\Hexagon\Taxonomies\\' . $class;
         new $class;
       }
@@ -127,6 +127,24 @@ class Hexagon {
       return false;
     }
     return true;
+  }
+
+  /**
+   * Remove dashes in strings and convert to camel case
+   *
+   * @url http://stackoverflow.com/questions/2791998/convert-dashes-to-camelcase-in-php
+   *
+   * @since  0.0.2
+   * @access protected
+   * @param  $str          string
+   * @param  $capFirstChar bool capitalize first character (for class syntax)
+   */
+  public static function dashesToCamelCase($str, $capFirstChar = false) {
+    $string = str_replace(' ', '', ucwords(str_replace('-', ' ', $str)));
+    if (!$capFirstChar) {
+      $string = lcfirst($string);
+    }
+    return $string;
   }
 }
 
