@@ -61,9 +61,12 @@ class Hexagon {
    */
   private function bootstrap() {
     if ($this->requirementsMet($this->required_php_version, $this->required_wp_version)) {
-      foreach(glob(__DIR__.'/lib/*.php') as $file) {
-        require_once($file);
-      }
+      require_once('lib/admin-notice-helper.php');
+      require_once('lib/base.php');
+      require_once('lib/taxonomy.php');
+      require_once('lib/post-type.php');
+      require_once('lib/short-code.php');
+      // require_once('lib/short-code-atts.php');
       foreach (glob(__DIR__.'/modules/*.php') as $file) {
         require_once($file);
         $basename = basename($file, '.php');
