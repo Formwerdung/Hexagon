@@ -50,7 +50,7 @@ class Taxonomy extends Base {
         register_taxonomy(static::$slug, $objs, $params);
       }
     } else {
-      add_notice(__METHOD__ . ' error: Required static properties are not all set. No Taxonomy added.', 'error');
+      \Formwerdung\Hexagon\Lib\AdminNoticeHelper\addNotice(__METHOD__ . ' error: Required static properties are not all set. No Taxonomy added.', 'error');
     }
   }
 

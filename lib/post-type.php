@@ -44,11 +44,11 @@ class PostType extends Base {
         $params = static::getPostTypeParams();
         $post_type        = register_post_type(static::$slug, $params);
         if (is_wp_error($post_type)) {
-          \add_notice(__METHOD__ . ' error: ' . $post_type->get_error_message(), 'error');
+          \Formwerdung\Hexagon\Lib\addNotice(__METHOD__ . ' error: ' . $post_type->get_error_message(), 'error');
         }
       }
     } else {
-      \add_notice(__METHOD__ . ' error: Required static properties are not all set. No Custom Post Type added.', 'error');
+      \Formwerdung\Hexagon\Lib\addNotice(__METHOD__ . ' error: Required static properties are not all set. No Custom Post Type added.', 'error');
     }
   }
 

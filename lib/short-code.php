@@ -12,7 +12,7 @@ abstract class ShortCode extends Base {
    * @since  0.0.3
    * @access protected
    */
-  abstract static public function markup($atts, $content = '');
+  abstract public static function markup($atts, $content = '');
 
   /**
    * Enforce use of a function to register all WordPress hook callbacks
@@ -20,7 +20,7 @@ abstract class ShortCode extends Base {
    * @since  0.0.3
    * @access public
    */
-   public function registerHookCallbacks() {
-     add_shortcode(static::$slug, get_called_class() . '::markup');
-   }
+  public function registerHookCallbacks() {
+    add_shortcode(static::$slug, get_called_class() . '::markup');
+  }
 }

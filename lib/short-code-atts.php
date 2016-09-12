@@ -12,7 +12,7 @@ abstract class ShortCodeAtts extends ShortCode {
    * @since  0.0.3
    * @access protected
    */
-  abstract static protected function defaultAtts($atts);
+  abstract protected static function defaultAtts($atts);
 
   /**
    * Check attribute function
@@ -20,7 +20,7 @@ abstract class ShortCodeAtts extends ShortCode {
    * @since  0.0.3
    * @access protected
    */
-  abstract static protected function checkAtts($atts);
+  abstract protected static function checkAtts($atts);
 
   /**
    * Enforce use of a function to register all WordPress hook callbacks
@@ -28,7 +28,7 @@ abstract class ShortCodeAtts extends ShortCode {
    * @since  0.0.3
    * @access public
    */
-   public function registerHookCallbacks() {
-     add_shortcode(static::$slug, get_called_class() . '::markup');
-   }
+  public function registerHookCallbacks() {
+    add_shortcode(static::$slug, get_called_class() . '::markup');
+  }
 }
