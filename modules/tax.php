@@ -1,6 +1,6 @@
 <?php
 
-namespace Formwerdung\Hexagon\Taxonomies;
+namespace Formwerdung\Hexagon\Modules;
 
 class Tax extends \Formwerdung\Hexagon\Lib\Taxonomy {
   protected static $name = 'Tax';

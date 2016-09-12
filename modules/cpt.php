@@ -1,6 +1,6 @@
 <?php
 
-namespace Formwerdung\Hexagon\Taxonomies;
+namespace Formwerdung\Hexagon\Modules;
 
 /**
  * Creates a custom taxonomy, ratings

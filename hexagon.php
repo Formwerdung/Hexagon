@@ -61,15 +61,14 @@ class Hexagon {
    */
   private function bootstrap() {
     if ($this->requirementsMet($this->required_php_version, $this->required_wp_version)) {
-      require_once('lib/admin-notice-helper.php');
-      require_once('lib/base.php');
-      require_once('lib/taxonomy.php');
-      require_once('lib/post-type.php');
+      foreach(glob(__DIR__.'/lib/*.php') as $file) {
+        require_once($file);
+      }
       foreach (glob(__DIR__.'/modules/*.php') as $file) {
         require_once($file);
         $basename = basename($file, '.php');
         $class = $this->dashesToCamelCase($basename, true);
-        $class = '\Formwerdung\Hexagon\Taxonomies\\' . $class;
+        $class = '\Formwerdung\Hexagon\Modules\\' . $class;
         new $class;
       }
     } else {
