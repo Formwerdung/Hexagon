@@ -17,28 +17,15 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://wpackagist.org"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "iandunn/admin-notice-helper",
-        "version": "0.2",
-        "source": {
-          "url": "https://github.com/iandunn/admin-notice-helper",
-          "type": "git",
-          "reference": "6c16d41a6710bfd59e6d0be2430823fbb6b3cdc6"
-        }
-      }
+      "url": "https://wpackagist.org"
     }
   ],
   "support": {
     "issues": "https://github.com/Formwerdung/Square/issues"
   },
   "require": {
-    "php": ">=5.4.0",
-    "composer/installers": "~1.0.12",
-    "iandunn/admin-notice-helper": "0.2"
+    "php": ">=5.6.0",
+    "composer/installers": "~1.0"
   },
   "extra": {
     "installer-paths": {

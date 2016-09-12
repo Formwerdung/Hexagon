@@ -21,7 +21,7 @@ class Hexagon {
    * @access public
    * @var    string
    */
-  public $required_php_version = '5.4';
+  public $required_php_version = '5.6';
 
   /**
    * Plugin requires WordPress version
@@ -61,7 +61,7 @@ class Hexagon {
    */
   private function bootstrap() {
     if ($this->requirementsMet($this->required_php_version, $this->required_wp_version)) {
-      require_once('vendor/iandunn/admin-notice-helper/admin-notice-helper.php');
+      require_once('lib/admin-notice-helper.php');
       require_once('lib/base.php');
       require_once('lib/taxonomy.php');
       require_once('lib/post-type.php');
